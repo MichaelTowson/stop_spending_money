@@ -16,14 +16,14 @@ class User(models.Model):
     #goals = a list of goals that the user has made.
 
 class Goal(models.Model):
-    user = models.ForeignKey(User, related_name = "goals")
+    user = models.ForeignKey(User, related_name = "goals", on_delete = models.CASCADE)
     category = models.CharField(max_length=30)
     balance = models.FloatField()
     start_date = models.DateField()
     #transactions - a list of transactions underneath each goal.
 
 class Transaction(models.Model):
-    goal = models.ForeignKey(Goal, related_name = "transactions") 
+    goal = models.ForeignKey(Goal, related_name = "transactions", on_delete = models.CASCADE) 
     date = models.DateField()
     amount = models.FloatField()
     description = models.CharField(max_length = 50)

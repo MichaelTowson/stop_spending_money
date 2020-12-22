@@ -1,0 +1,24 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    background-color: gray;
+    padding: 20px;
+}
+
+.appWindow{
+    margin: 0px auto;
+    width: 1000px;
+}
+
+.navBar{
+    width: 450px;
+    display: inline;
+}
+
+/* Row */
+.row{display: flex;}
+.row button{display: inline;}
+.row h1{display: inline;}
