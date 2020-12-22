@@ -1,17 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
     <title>Stop Spending Money</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        .con {
+            background-color: burlywood;
+            border: 2px solid black;
+            padding: 50px;
+            width: 600px;
+        }
+
+        .main_div {
+            width: 600px;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
-
+        <h1>Stop Spending Money</h1>
+        <div class="main_div">
+            <form class="con position-absolute top-50 start-50 translate-middle">
+                <div class="mb-3">
+                    <label class="form-label">User Name</label>
+                    <input type="text" name="user_name" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="user_pass" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button><br>
+                <div>
+                    <p>Learn about the app <a href="#">here</a></p>
+                    <p>New user? Register <a href="#">here</a></p>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>
