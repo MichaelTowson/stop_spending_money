@@ -19,12 +19,6 @@ body{
     width: 1000px;
 }
 
-.navBar{
-    width: 400px;
-    display: inline-flex;
-    flex-flow: row-reverse;
-}
-
 .headerBox h1{
     display: inline-block;
 }
@@ -49,7 +43,6 @@ body{
     width: 600px;
     display: flex;
     flex-wrap: wrap;
-    padding: 20px 0px;
     vertical-align: top;
 }
 
@@ -64,20 +57,66 @@ body{
     display: inline-block;
 }
 
-.goalsFormBox{
+.goalsBox{
     width: 600px;
 
 }
 
-.goalsFormBox input{
+.wideInput{
     width: 300px;
 }
 
-.goalsFormBox img{
+.goalsBox img{
     margin: 10px;
+    display: inline-block;
+}
+
+.add_circle_button{
+        background-color: blue;
+        border: none;
+        border-radius: 100%;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 36px;
+        margin: 4px 2px;
+        cursor: pointer;
+        /* width: 40px;
+        height: 40px; */
+    }
+
+
+.goalsBox p{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.goalsBox label{
     display: block;
 }
 
-.goalsFormBox p{
+#finishAddingGoals{
+    width: 600px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: right;
+}
+
+.bottomLeftContent{
     display: inline-block;
+    width: 600px;
+}
+
+.bottomRightContent{
+    display: inline-block;
+    margin-left: 20px;
+    min-height: 400px;
+    padding: 20px;
+    width: 375px;
+    border: solid black 1px;
+    vertical-align: top;
 }
