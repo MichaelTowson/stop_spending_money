@@ -9,28 +9,13 @@
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
-    <title>Stop Spending Money</title>
-    <style>
-        h1 {
-            text-align: center;
-        }
-
-        .con {
-            background-color: burlywood;
-            border: 2px solid black;
-            padding: 50px;
-            width: 600px;
-        }
-
-        .main_div {
-            width: 600px;
-        }
-    </style>
+    <title>Stop Spending Money!</title>
 </head>
 
 <body>
+<div class = "background">
+    <h1>Stop Spending Money!</h1>
     <div class="container">
-        <h1>Stop Spending Money</h1>
         <div class="main_div">
             <form action="/log_in" method="POST" class="con position-absolute top-50 start-50 translate-middle">
                 {% csrf_token %}
@@ -66,6 +51,7 @@
             </form>
         </div>
     </div>
+</div>
 </body>
 
 </html>

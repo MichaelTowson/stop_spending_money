@@ -17,4 +17,5 @@ urlpatterns = [
     path('goals/add_goal',views.add_goal),
     path('goals/delete_goal/<int:id>', views.delete_goal),
     path('log_trans', views.log_trans)
+    path('goals/add_start_date',views.add_start_date),
 ]
