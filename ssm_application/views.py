@@ -12,7 +12,17 @@ def register(request):
 
 def dashboard(request): 
     if 'userid' in request.session:
-        return render(request, "dashboard.html")
+        logged_user = User.objects.get(id=request.session['userid'])
+        user_goal = logged_user.goals.all()
+        # for val in user_goal:
+        #     val.transactions.all()
+        
+        context = {
+            'user': logged_user,
+            'user_goals': user_goal,
+            # 'trans': user_goal.transactions.all()
+        }
+        return render(request, "dashboard.html", context)
     return redirect("/")
 
 def goals(request):
@@ -23,9 +33,23 @@ def goals(request):
             'user_goals': logged_user.goals.all()
         }
         return render(request, "goals.html", context)
+    return redirect("/")
 
 def about(request):
     return render(request, "about.html")
+
+def log_trans(request):
+    if 'userid' in request.session:
+        goal_id = request.POST['category']
+        goal = Goal.objects.get(id = goal_id)
+        purchase_date = request.POST['purchase_date']
+        amt_spent = request.POST['amt_spent']
+        desc = request.POST['desc']
+        Plan_or_not = request.POST['Plan_or_not']
+        how_happy = request.POST['how_happy']
+        Transaction.objects.create(goal = goal, date = purchase_date, amount = amt_spent, description = desc, planned = Plan_or_not, happiness = how_happy)
+        return redirect("/dashboard")
+    return redirect("/")
 
 #Login/Registration Views
 def register_user(request):
