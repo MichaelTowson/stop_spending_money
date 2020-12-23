@@ -14,5 +14,6 @@ urlpatterns = [
     path('logout', views.logout),
     path('reg_user', views.register_user),
     path('log_in', views.log_in),
-    path('goals/add_goal',views.add_goal)
+    path('goals/add_goal',views.add_goal),
+    path('goals/delete_goal/<int:id>', views.delete_goal)
 ]
