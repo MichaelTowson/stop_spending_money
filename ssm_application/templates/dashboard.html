@@ -53,7 +53,7 @@
 <body>
     <div class="container-xxl main_con">
         <div class="d-flex justify-content-between">
-            <h2>Welcome User</h2>
+            <h2>Welcome {{ user.first_name }}</h2>
             <a href="/logout" class="btn btn-primary">Logout</a>
         </div>
         <div class="d-flex justify-content-between">
@@ -105,14 +105,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for val in user_goals %}
                     <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
+                        <td>{{ val.category }}</td>
+                        {% for x in val.transactions.all() %}
+                        <td>{{ x.date }}</td>
+                        <td>{{ x.amount }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>{{ x.planned }}</td>
+                        <td>{{ x.happiness }}</td>
                     </tr>
+                    {% endfor %}
+                    {% endfor %}
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
@@ -136,50 +140,51 @@
             <div style="width: 870px;">
                 <a href="/goals" class="btn btn-primary">Edit Goals</a><br><br>
                 <h3>Log a Purchase:</h3>
-                <form action="#" method="POST">
+                <form action="/log_trans" method="POST">
+                    {% csrf_token %}
                     <div class="d-flex justify-content-between">
                         <div>
                             <label for="date">Date</label><br>
-                            <input type="date">
+                            <input name="purchase_date" type="date">
                         </div>
                         <div>
                             <label for="category">Category</label><br>
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="category" class="form-select">
                                 <option selected>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                {% for val in user_goals %}
+                                <option value="{{ val.id }}">{{ val.category }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                         <div>
                             <label for="amount">Amount Spent</label><br>
-                            <input type="number" placeholder="$0.00">
+                            <input name="amt_spent" type="number" placeholder="$0.00">
                         </div>
                         <div>
                             <label for="desc">Description(Optional)</label><br>
-                            <input type="textarea" name="" id="">
+                            <input type="textarea" name="desc" id="">
                         </div>
                     </div>
                     <div class="d-flex justify-content-between div_margin">
                         <div>
                             <label for="">Did you plan to spend this money?</label><br>
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="Plan_or_not" class="form-select" aria-label="Default select example">
                                 <option selected>Option</option>
-                                <option value="1">Yes</option>
-                                <option value="2">No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
                         <div>
                             <label for="">How happy did this purchase make you?</label><br>
-                            <select class="form-select" aria-label="Default select example">
+                            <select name="how_happy" class="form-select" aria-label="Default select example">
                                 <option selected>Option</option>
-                                <option value="1">Very happy</option>
-                                <option value="2">Briefly happy</option>
-                                <option value="2">The same</option>
-                                <option value="2">Less happy/Regret</option>
+                                <option value="Very happy">Very happy</option>
+                                <option value="Briefly happy">Briefly happy</option>
+                                <option value="The same">The same</option>
+                                <option value="Less happy/Regret">Less happy/Regret</option>
                             </select>
                         </div>
-                        <button class="button">+</button>
+                        <button type="submit" class="button">+</button>
                     </div><br>
                 </form>
             </div>
