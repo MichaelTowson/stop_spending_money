@@ -27,7 +27,7 @@
     </div>
 
     <div class = "instructionsBox">
-        <h4>Welcome to "Stop Spending Money!"</h4>
+        <h4>Hello {{user.first_name}}! Welcome to "Stop Spending Money!"</h4>
         <br>
         <p>Use the form below to make a few goals about areas you want to stop overspending in. You can use the suggestions or make your own categories. Don't worry... you can come back to your plan and add more later! When you are done, set a start date for your plan (which could be today) and click "finish adding goals." Happy budgeting!</p>
     </div>
@@ -45,23 +45,24 @@
         </div>
         
         <div class = "goalsBox">
-            <form action="">
+            <form action="goals/add_goal", method="POST">
+                {% csrf_token %}
                 <label for="">Category Chosen (Or Enter Your Own)</label>
                 <input type="text" name="category" id="" class="wideInput">
                 <label for="">How much do you want to spend per week on this category?</label>
-                <input type="text" name="goalAmount" id="" class="wideInput">
+                <input type="text" name="amount" id="" class="wideInput">
                 <br>
-                <a href="#" class="btn btn-primary add_circle_button">+</a>
+                <button class="btn btn-primary add_circle_button" action="submit">+</button>
                 <p>Add this goal</p>
             </form>
-            <form action="" id="finishAddingGoals">
+            <form action="" id="finishAddingGoals" style = "margin-top: 200px">
                 <div style="margin-right: 20px">
-                    <label for="start_date">Pick a start date for your plan:</label>
+                    <label for="start_date">Pick a start date to work on all of your goals:</label>
                     <input type="date">
                     <button class="btn btn-primary">Add Date</button>
                 </div>
             </form>
-            <a href="/dashboard"><button class="btn btn-primary" style = "height: 60px; width: 300px; margin: 200px 0px 0px 280px; background-color: black; border-color: black;">Finish Adding Goals</button></a>
+            <a href="/dashboard"><button class="btn btn-primary" style = "height: 60px; width: 280px; margin: 40px 0px 0px 270px; background-color: black; border-color: black;">Finish Adding Goals</button></a>
         </div>
     </div>
 
@@ -72,8 +73,15 @@
             <th>Category</th>
             <th>Goal</th>
             <th>Activity</th>
+            {% for goal in user_goals %}
             <tr>
-                <td>Coffee/Tea</td>
+                <td>{{goal.category}}</td>
+                <td>{{goal.amount}}</td>
+                <td>DELETE</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>SAMPLE Coffee/Tea</td>
                 <td>$15</td>
                 <td>DELETE</td>
             </tr>

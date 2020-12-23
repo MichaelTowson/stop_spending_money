@@ -3,21 +3,32 @@ from ssm_application.models import User, Goal, Transaction
 from django.contrib import messages
 import bcrypt
 
-#Render Routes
+#Render Template Views
 def index(request):
     return render(request, "index.html")
 
 def register(request):
     return render(request, "register.html")
 
-def dashboard(request):
+def dashboard(request): 
     if 'userid' in request.session:
         return render(request, "dashboard.html")
     return redirect("/")
 
 def goals(request):
-    return render(request, "goals.html")
+    if 'userid' in request.session:
+        logged_user = User.objects.get(id=request.session['userid'])
+        context = {
+            'user': logged_user,
+            'user_goals': logged_user.goals.all()
+        }
+        return render(request, "goals.html", context)
+    return redirect("/")
 
+def about(request):
+    return render(request, "about.html")
+
+#Login/Registration Views
 def register_user(request):
     errors = User.objects.registerUser_validator(request.POST)
     if errors:
@@ -51,6 +62,19 @@ def log_in(request):
 def logout(request):
     request.session.flush()
     return redirect("/")
-def about(request):
-    return render(request, "about.html")
+
+#Goals Page Views
+def add_goal(request):
+#Add validator check ---------------!
+    #Get data from request
+    userid = request.session['userid']
+    user = User.objects.get(id=userid) 
+    category = request.POST['category']
+    amount = request.POST['amount']
+    
+    #Create goal
+    Goal.objects.create(user=user, category=category, amount=amount)
+    
+    return redirect("/goals")
+
 
