@@ -24,24 +24,6 @@ def goals(request):
         }
         return render(request, "goals.html", context)
 
-def log_in(request):
-    errors = User.objects.loginValidator(request.POST)
-    if errors:
-        for key, value in errors.items():
-            messages.error(request, value, extra_tags=key)
-        return redirect("/")
-    user = User.objects.filter(email=request.POST['email'])
-    if user:
-        logged_user = user[0] 
-        if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
-            request.session['userid'] = logged_user.id
-            return redirect('/dashboard')
-    messages.error(request, "Password doesn't match!", extra_tags='pw_not_match')
-    return redirect("/")
-
-def logout(request):
-    request.session.flush()
-    return redirect("/")
 def about(request):
     return render(request, "about.html")
 

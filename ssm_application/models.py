@@ -38,7 +38,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=80)
     password = models.CharField(max_length=255)
-    plan_start_date = models.DateField()
+    plan_start_date = models.DateField(default='2020-01-01')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = Manager()
