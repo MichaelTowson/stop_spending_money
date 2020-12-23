@@ -70,10 +70,17 @@ def add_goal(request):
     user = User.objects.get(id=userid) 
     category = request.POST['category']
     amount = request.POST['amount']
+    amount = float(amount)
+    amount = round(amount, 2)
     
     #Create goal
     Goal.objects.create(user=user, category=category, amount=amount)
     
     return redirect("/goals")
 
+def delete_goal(request, id):
+    this_goal = Goal.objects.get(id=id)
+    if(request.session['userid'] == this_goal.user.id):
+        this_goal.delete()
+    return redirect("/goals")
 
