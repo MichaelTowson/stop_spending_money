@@ -63,26 +63,28 @@
                     <thead class="table-secondary">
                         <tr>
                             <th scope="col">Category</th>
+                            <th scope="col">Target Goal</th>
                             <th scope="col">Amount Spent</th>
                             <th scope="col">Balance</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for goal in user_goals %}
                         <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td>{{goal.category}}</td>
+                            <td>{{goal.amount}}</td>
+                            {% for key, val in goal_trans.items %}
+                            {% if key == goal.category %}
+                            <td>{{ val }}</td>
+                            {% endif %}
+                            {% endfor %}
+                            {% for key, val in goal_bal.items %}
+                            {% if key == goal.category %}
+                            <td>{{ val }}</td>
+                            {% endif %}
+                            {% endfor %}
                         </tr>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -102,37 +104,23 @@
                         <th scope="col">Description</th>
                         <th scope="col">Planned?</th>
                         <th scope="col">Happiness Impact</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for val in user_goals %}
+                    {% for x in val.transactions.all %}
                     <tr>
                         <td>{{ val.category }}</td>
-                        {% for x in val.transactions.all() %}
                         <td>{{ x.date }}</td>
                         <td>{{ x.amount }}</td>
                         <td>{{ x.description }}</td>
                         <td>{{ x.planned }}</td>
                         <td>{{ x.happiness }}</td>
+                        <td><a href="/delete_trans/{{ x.id }}">Delete</a></td>
                     </tr>
                     {% endfor %}
                     {% endfor %}
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
