@@ -6,10 +6,13 @@ urlpatterns = [
 #Render Routes
     path('', views.index),
     path('register', views.register),
-    path('reg_user', views.register_user),
-    path('log_in', views.log_in),
     path('dashboard', views.dashboard),
     path('goals', views.goals),
+    path('about', views.about),
+
+#Action/Redirect Routes
     path('logout', views.logout),
-    path('about', views.about)
+    path('reg_user', views.register_user),
+    path('log_in', views.log_in),
+    path('goals/add_goal',views.add_goal)
 ]

@@ -38,6 +38,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.CharField(max_length=80)
     password = models.CharField(max_length=255)
+    plan_start_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = Manager()
@@ -46,8 +47,7 @@ class User(models.Model):
 class Goal(models.Model):
     user = models.ForeignKey(User, related_name = "goals", on_delete = models.CASCADE)
     category = models.CharField(max_length=30)
-    balance = models.FloatField()
-    start_date = models.DateField()
+    amount = models.FloatField()
     #transactions - a list of transactions underneath each goal.
 
 class Transaction(models.Model):
