@@ -23,10 +23,24 @@ def dashboard(request):
         end_date = selected_date + datetime.timedelta(days=7)
         time_remaining = end_date - datetime.datetime.now() #timedelta
         
+        #Nicky's code for storing transactions
+        trans_dict = {}
+        bal_trans = {}
+        for val in user_goal:
+            sum = 0
+            for trans in val.transactions.all():
+                sum += trans.amount
+            trans_dict[val.category] = sum
+            bal_trans[val.category] = val.amount - sum
+        print(trans_dict)
+        
+        #Context we are passing to webpage
         context = {
             'user': logged_user,
             'user_goals': user_goal,
             'time_remaining': time_remaining,
+            'goal_trans': trans_dict,
+            'goal_bal': bal_trans,
             # 'trans': user_goal.transactions.all()
         }
         return render(request, "dashboard.html", context)
@@ -121,6 +135,15 @@ def delete_goal(request, id):
     if(request.session['userid'] == this_goal.user.id):
         this_goal.delete()
     return redirect("/goals")
+
+def delete_trans(request, trans_id):
+    if 'userid' in request.session:
+        this_trans = Transaction.objects.get(id = trans_id)
+        this_trans.delete()
+        return redirect("/dashboard")
+    return redirect("/")
+
+
 
 def add_start_date(request):
     user = User.objects.get(id=request.session['userid'])

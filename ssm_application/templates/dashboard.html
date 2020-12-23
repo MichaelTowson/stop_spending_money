@@ -74,8 +74,16 @@
                         <tr>
                             <td>{{goal.category}}</td>
                             <td>{{goal.amount}}</td>
-                            <td>---</td>
-                            <td>---</td>
+                            {% for key, val in goal_trans.items %}
+                            {% if key == goal.category %}
+                            <td>{{ val }}</td>
+                            {% endif %}
+                            {% endfor %}
+                            {% for key, val in goal_bal.items %}
+                            {% if key == goal.category %}
+                            <td>{{ val }}</td>
+                            {% endif %}
+                            {% endfor %}
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -101,30 +109,24 @@
                         <th scope="col">Description</th>
                         <th scope="col">Planned?</th>
                         <th scope="col">Happiness Impact</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for val in user_goals %}
                     {% for x in val.transactions.all %}
                     <tr>
-                            <td>{{ val.category }}</td>
-                            <td>{{ x.date }}</td>
-                            <td>{{ x.amount }}</td>
-                            <td>{{ x.description }}</td>
-                            <td>{{ x.planned }}</td>
-                            <td>{{ x.happiness }}</td>
-                            {% endfor %}
+                        <td>{{ val.category }}</td>
+                        <td>{{ x.date }}</td>
+                        <td>{{ x.amount }}</td>
+                        <td>{{ x.description }}</td>
+                        <td>{{ x.planned }}</td>
+                        <td>{{ x.happiness }}</td>
+                        <td><a href="/delete_trans/{{ x.id }}">Delete</a></td>
                     </tr>
 
                     {% endfor %}
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
