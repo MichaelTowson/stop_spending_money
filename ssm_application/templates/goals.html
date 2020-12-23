@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{% static 'css/goals_style.css' %}">
     
     <title>Stop Spending Money: Goals</title>
+    <script>
+        function moveNumbers(val){
+            document.getElementById("result").value=val;
+        }
+    </script>
 </head>
 
 <body></body>
@@ -34,20 +39,20 @@
     <div class = "bottomLeftContent">
         <div class = "categoryBox">
             <h2>Choose one or more goals for areas that you want to save money.</h2>
-            <button class="btn btn-primary">Coffee/Tea</button>
-            <button class="btn btn-primary">Fast Food/Restaurants</button>
-            <button class="btn btn-primary">Alcohol</button>
-            <button class="btn btn-primary">Entertainment</button>
-            <button class="btn btn-primary">Books</button>
-            <button class="btn btn-primary">Snacks/Dessert</button>
-            <button class="btn btn-primary">Amazon.com</button>
-            <button class="btn btn-primary">Leisure Shopping</button>
+            <button class="btn btn-primary" value="Coffee/Tea" onclick="moveNumbers(this.value)">Coffee/Tea</button>
+            <button class="btn btn-primary" value="Fast Food/Restaurants" onclick="moveNumbers(this.value)">Fast Food/Restaurants</button>
+            <button class="btn btn-primary" value="Alcohol" onclick="moveNumbers(this.value)">Alcohol</button>
+            <button class="btn btn-primary" value="Entertainment" onclick="moveNumbers(this.value)">Entertainment</button>
+            <button class="btn btn-primary" value="Books" onclick="moveNumbers(this.value)">Books</button>
+            <button class="btn btn-primary" value="Snacks/Dessert" onclick="moveNumbers(this.value)">Snacks/Dessert</button>
+            <button class="btn btn-primary" value="Amazon.com" onclick="moveNumbers(this.value)">Amazon.com</button>
+            <button class="btn btn-primary" value="Leisure Shopping" onclick="moveNumbers(this.value)">Leisure Shopping</button>
         </div>
         
         <div class = "goalsBox">
             <form action="">
                 <label for="">Category Chosen (Or Enter Your Own)</label>
-                <input type="text" name="category" id="" class="wideInput">
+                <input type="text" name="category" id="result" class="wideInput">
                 <label for="">How much do you want to spend per week on this category?</label>
                 <input type="text" name="goalAmount" id="" class="wideInput">
                 <br>
