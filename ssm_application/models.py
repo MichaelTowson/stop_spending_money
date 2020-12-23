@@ -2,7 +2,35 @@ from django.db import models
 import bcrypt, re
 
 class Manager(models.Manager):
-    def registerUser_valiadtor(self, postData):
+    def registerUser_validator(self, postData):
+        errors = {}
+        # validating email
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern
+            errors['email'] = "Invalid email address!"
+        mailExist = User.objects.filter(email = postData['email'])
+        if mailExist:
+            errors["email"] = "Email already Exist"
+        # validating the names
+        if len(postData['first_name']) < 3:
+            errors["first_name"] = "Should be at least 2 characters"
+        if len(postData['last_name']) < 3:
+            errors["last_name"] = "Should be at least 2 characters"
+        #validating password characters
+        if len(postData['password']) < 8:
+            errors["password"] = "Please make sure password is at least 8 characters"
+        return errors
+
+    def loginValidator(self, postData):
+        errors = {}
+        # validating email
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern
+            errors['not_email'] = "Invalid email address!"
+            return errors
+        mailExist = User.objects.filter(email = postData['email'])
+        if not mailExist:
+            errors['not_email'] = "Email doesn't Exist!"
         return errors
 
 class User(models.Model):
