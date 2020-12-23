@@ -3,6 +3,7 @@ from ssm_application.models import User, Goal, Transaction
 from django.contrib import messages
 import bcrypt
 
+#Render Routes
 def index(request):
     return render(request, "index.html")
 
@@ -50,3 +51,6 @@ def log_in(request):
 def logout(request):
     request.session.flush()
     return redirect("/")
+def about(request):
+    return render(request, "about.html")
+
