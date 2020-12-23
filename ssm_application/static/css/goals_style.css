@@ -4,13 +4,27 @@
 }
 
 body{
-    background-color: gray;
-    padding: 20px;
+    width: 1920px;
+    height: 1080px;
+    background-color: black;
+}
+
+.background{
+    width: 1920px;
+    height: 1080px;
+    background: url("/static/images/field.jpg");
+    background-size: 1920px 1080px;
+    background-repeat: no-repeat;
 }
 
 .appWindow{
+    background-color: white;
     margin: 0px auto;
-    width: 1000px;
+    width: 1080px;
+    padding: 20px;
+    border-left: solid black;
+    border-right: solid black;
+    height: 1080px;
 }
 
 .headerBox{
@@ -51,10 +65,13 @@ body{
 }
 
 .categoryBox button{
-    width: 125px;
+    width: 140px;
+    padding: 5px;
     height: 60px;
     margin: 5px;
     display: inline-block;
+    background-color: darkblue;
+    border-color: darkblue;
 }
 
 .goalsBox{
@@ -72,19 +89,18 @@ body{
 }
 
 .add_circle_button{
-        background-color: blue;
+        background-color: black;
         border: none;
         border-radius: 100%;
         color: white;
-        padding: 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 36px;
+        font-size: 18px;
         margin: 4px 2px;
         cursor: pointer;
-        /* width: 40px;
-        height: 40px; */
+        width: 40px;
+        height: 40px;
     }
 
 
@@ -114,7 +130,7 @@ body{
 .bottomRightContent{
     display: inline-block;
     margin-left: 20px;
-    min-height: 400px;
+    min-height: 650px;
     padding: 20px;
     width: 375px;
     border: solid black 1px;

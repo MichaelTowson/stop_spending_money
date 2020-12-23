@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/goals_style.css' %}">
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <title>Stop Spending Money: Goals</title>
 </head>
 
-<body>
+<body></body>
+
+<div class = "background">
 <div class = "appWindow">
     <div class = "headerBox">
         <h1>Set Your Goals</h1>
         <div>
-            <button>View Dashboard</button>
-            <button>Log out</button>
+            <a href="/dashboard"><button class="btn btn-primary">View Dashboard</button></a>
+            <a href="/"><button class="btn btn-primary">Log Out</button></a>
         </div>
     </div>
 
@@ -31,14 +34,14 @@
     <div class = "bottomLeftContent">
         <div class = "categoryBox">
             <h2>Choose one or more goals for areas that you want to save money.</h2>
-            <button>Coffee/Tea</button>
-            <button>Fast Food/Restaurants</button>
-            <button>Alcohol</button>
-            <button>Entertainment</button>
-            <button>Books</button>
-            <button>Snacks/Dessert</button>
-            <button>Amazon.com</button>
-            <button>Leisure Shopping</button>
+            <button class="btn btn-primary">Coffee/Tea</button>
+            <button class="btn btn-primary">Fast Food/Restaurants</button>
+            <button class="btn btn-primary">Alcohol</button>
+            <button class="btn btn-primary">Entertainment</button>
+            <button class="btn btn-primary">Books</button>
+            <button class="btn btn-primary">Snacks/Dessert</button>
+            <button class="btn btn-primary">Amazon.com</button>
+            <button class="btn btn-primary">Leisure Shopping</button>
         </div>
         
         <div class = "goalsBox">
@@ -52,17 +55,19 @@
                 <p>Add this goal</p>
             </form>
             <form action="" id="finishAddingGoals">
-                <button>Finish Adding Goals</button>
                 <div style="margin-right: 20px">
                     <label for="start_date">Pick a start date for your plan:</label>
                     <input type="date">
+                    <button class="btn btn-primary">Add Date</button>
                 </div>
             </form>
+            <a href="/dashboard"><button class="btn btn-primary" style = "height: 60px; width: 300px; margin: 200px 0px 0px 280px; background-color: black; border-color: black;">Finish Adding Goals</button></a>
         </div>
     </div>
 
     <div class = "bottomRightContent">
         <h2>Goals List:</h2>
+        <p>Start Date: (Pick a Date)</p>
         <table class = "table table-striped">
             <th>Category</th>
             <th>Goal</th>
@@ -75,7 +80,7 @@
         </table>
     </div>
 </div>
-
+</div>
 
 </body>
 
