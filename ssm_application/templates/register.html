@@ -10,7 +10,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
-    <title>Document</title>
+    <title>Registration</title>
     <style>
         h2 {
             text-align: center;
@@ -32,22 +32,51 @@
     <div class="container">
         <h2>User Register</h2>
         <div class="main_div">
-            <form class="con position-absolute top-50 start-50 translate-middle">
+            <form action="/reg_user" method="POST" class="con position-absolute top-50 start-50 translate-middle">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">Email (will serve you as your Username)</label>
                     <input type="email" name="email" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'email' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">First Name</label>
                     <input type="text" name="first_name" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'first_name' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Last Name</label>
                     <input type="text" name="last_name" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'last_name' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" id="password" name="user_pass" class="form-control">
+                    <input type="password" id="password" name="password" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'password' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Confirm Password</label>

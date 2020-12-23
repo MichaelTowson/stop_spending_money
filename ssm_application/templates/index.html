@@ -32,19 +32,34 @@
     <div class="container">
         <h1>Stop Spending Money</h1>
         <div class="main_div">
-            <form class="con position-absolute top-50 start-50 translate-middle">
+            <form action="/log_in" method="POST" class="con position-absolute top-50 start-50 translate-middle">
+                {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">User Name</label>
-                    <input type="text" name="user_name" class="form-control">
+                    <input type="text" name="email" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'not_email' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <input type="password" name="user_pass" class="form-control">
+                    <input type="password" name="password" class="form-control">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.extra_tags == 'pw_not_match' %}
+                    <p style="color: red;">* {{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button><br>
-                <div>
+                <button type="submit" class="btn btn-primary">Login</button><br><br>
+                <div class="d-flex justify-content-between">
                     <p>Learn about the app <a href="#">here</a></p>
-                    <p>New user? Register <a href="#">here</a></p>
+                    <p>New user? Register <a href="/register">here</a></p>
                 </div>
             </form>
         </div>
