@@ -53,9 +53,10 @@
 <body>
     <div class="container-xxl main_con">
         <div class="d-flex justify-content-between">
-            <h2>Welcome {{ user.first_name }}</h2>
+            <h2>Welcome, {{ user.first_name }}.</h2>
             <a href="/logout" class="btn btn-primary">Logout</a>
         </div>
+<!-- Goals Summary Table ------ -->
         <div class="d-flex justify-content-between">
             <div style="margin-top: 10px;">
                 <p>Your goals:</p>
@@ -63,35 +64,33 @@
                     <thead class="table-secondary">
                         <tr>
                             <th scope="col">Category</th>
+                            <th scope="col">Target Goal</th>
                             <th scope="col">Amount Spent</th>
                             <th scope="col">Balance</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for goal in user_goals %}
                         <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <td>{{goal.category}}</td>
+                            <td>{{goal.amount}}</td>
+                            <td>---</td>
+                            <td>---</td>
                         </tr>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
+
+<!-- Plan Start Time and Countdown ------ -->
             <div class="show_time">
-                <p>Plan start time: 12/20/2020, midnight</p>
-                <p>Time remaining this week 6 day, 6 hours, 20 minutes</p>
+                <p>Plan start time: {{user.plan_start_date}}</p>
+                <p>Time remaining this week: {{time_remaining}}</p>
             </div>
         </div>
         <div>
+
+<!-- Transaction Table ------ -->
             <p>Transactions:</p>
             <table class="table table-striped">
                 <thead class="table-secondary">
@@ -106,25 +105,18 @@
                 </thead>
                 <tbody>
                     {% for val in user_goals %}
+                    {% for x in val.transactions.all %}
                     <tr>
-                        <td>{{ val.category }}</td>
-                        {% for x in val.transactions.all() %}
-                        <td>{{ x.date }}</td>
-                        <td>{{ x.amount }}</td>
-                        <td>{{ x.description }}</td>
-                        <td>{{ x.planned }}</td>
-                        <td>{{ x.happiness }}</td>
+                            <td>{{ val.category }}</td>
+                            <td>{{ x.date }}</td>
+                            <td>{{ x.amount }}</td>
+                            <td>{{ x.description }}</td>
+                            <td>{{ x.planned }}</td>
+                            <td>{{ x.happiness }}</td>
+                            {% endfor %}
                     </tr>
+
                     {% endfor %}
-                    {% endfor %}
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                        <td>@mdo</td>
-                    </tr>
                     <tr>
                         <td>Mark</td>
                         <td>Otto</td>
@@ -136,6 +128,8 @@
                 </tbody>
             </table>
         </div>
+
+<!-- Log a Purchase ------ -->
         <div class="d-flex justify-content-between">
             <div style="width: 870px;">
                 <a href="/goals" class="btn btn-primary">Edit Goals</a><br><br>
@@ -198,19 +192,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td>Week 1</td>
+                        <td>Victory</td>
+                        <td>$50</td>
                     </tr>
                     <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <td>Week 2</td>
+                        <td>Missed</td>
+                        <td>-$10</td>
                     </tr>
                 </tbody>
             </table>
