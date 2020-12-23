@@ -9,30 +9,16 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/index_style.css' %}">
-    <title>Registration</title>
-    <style>
-        h2 {
-            text-align: center;
-        }
-
-        .con {
-            background-color: #cccccc;;
-            border: 2px solid black;
-            padding: 50px;
-        }
-
-        .main_div {
-            width: 600px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/register_style.css' %}">
+    <title>Stop Spending Money: Registration</title>
 </head>
 
 <body>
+<div class = "background">
     <div class="container">
-        <h2>User Register</h2>
+        <h2>Register New User</h2>
         <div class="main_div">
-            <form action="/reg_user" method="POST" class="con position-absolute top-50 start-50 translate-middle">
+            <form action="/reg_user" method="POST" class = "con">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label class="form-label">Email (will serve you as your Username)</label>
@@ -83,10 +69,13 @@
                     <input type="password" id="confirm_password" name="confirm_pass" class="form-control">
                 </div>
                 <div style="margin-top: 7px;" id="CheckPasswordMatch"></div>
-                <button type="submit" class="btn btn-primary">Register</button><br>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <a href="/" class = "btn btn-primary" id="go_back_button">Go Back</a><br>
             </form>
+            
         </div>
     </div>
+</div>
 </body>
 <script type="text/javascript">
     $(document).ready(function () {

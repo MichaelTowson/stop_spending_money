@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from ssm_application.models import User, Goal, Transaction
 from django.contrib import messages
+from datetime import datetime, timedelta
 import bcrypt
 
 #Render Template Views
@@ -18,9 +19,16 @@ def dashboard(request):
 def goals(request):
     if 'userid' in request.session:
         logged_user = User.objects.get(id=request.session['userid'])
+        plan_start_date = str(logged_user.plan_start_date)
+        if(plan_start_date == "2020-01-01"): #This is the default date for a new user. It determines if the "goals" page should display the start date for the plan or not.
+            valid_start = 0
+        else:
+            valid_start = 1
+        print(valid_start)
         context = {
             'user': logged_user,
-            'user_goals': logged_user.goals.all()
+            'user_goals': logged_user.goals.all(),
+            'valid_start': valid_start
         }
         return render(request, "goals.html", context)
 
@@ -84,3 +92,24 @@ def delete_goal(request, id):
         this_goal.delete()
     return redirect("/goals")
 
+def add_start_date(request):
+    user = User.objects.get(id=request.session['userid'])
+    selected_date = request.POST['selected_date']
+    print('Here is the first selected date:')
+    print(selected_date)
+    
+    selected_date = datetime.strptime(selected_date, '%Y-%m-%d')
+    print('Here is the modified selected date:')
+    print(selected_date)
+    
+    dateDifference = selected_date - datetime.now() 
+    dateDifference = dateDifference.total_seconds()
+    dateDifference = int(dateDifference)
+    print(dateDifference)
+    if(dateDifference <= 0):
+        print("Invalid: Date is in the past")
+    elif(dateDifference >= 0):
+        print("Date is valid.")
+        user.plan_start_date = request.POST['selected_date']
+        user.save()
+    return redirect("/goals")

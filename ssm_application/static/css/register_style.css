@@ -9,31 +9,34 @@ body{
     background-color: black;
 }
 
-h1 {
-    background-color: black;
-    color: white;
-    text-align: center;
-    font-size: 70px;
-    height: 100px
-}
-
-.con{
-    background-color:  rgb(222, 239, 245);
-    border: 2px solid black;
-    padding: 50px;
-    width: 600px;
-}
-
 .background{
     width: 1920px;
     height: 1080px;
-    padding-top: 40px;
+    padding-top: 140px;
     background: url("/static/images/valley.jpg");
     background-size: 1920px 1080px;
     background-repeat: no-repeat;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 36px;
+}
+
+.con {
+    background-color: rgb(222, 239, 245);
+    border: 2px solid black;
+    padding: 50px;
 }
 
 .main_div {
     width: 600px;
 }
 
+#go_back_button{
+    display: inline;
+    background-color: black;
+    color: white;
+    border-color: black;
+}
