@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from ssm_application.models import User, Goal, Transaction
 from django.contrib import messages
-from datetime import datetime, timedelta
+import datetime
 import bcrypt
 
 #Render Template Views
@@ -15,6 +15,15 @@ def dashboard(request):
     if 'userid' in request.session:
         logged_user = User.objects.get(id=request.session['userid'])
         user_goal = logged_user.goals.all()
+        
+        #Calculate the remaining time in the plan, which will be displayed on the render.
+        selected_date = logged_user.plan_start_date #datetime object
+        selected_date = datetime.datetime.strftime(selected_date, '%Y-%m-%d')
+        selected_date = datetime.datetime.strptime(selected_date, '%Y-%m-%d')
+        end_date = selected_date + datetime.timedelta(days=7)
+        time_remaining = end_date - datetime.datetime.now() #timedelta
+        
+        #Nicky's code for storing transactions
         trans_dict = {}
         bal_trans = {}
         for val in user_goal:
@@ -24,9 +33,12 @@ def dashboard(request):
             trans_dict[val.category] = sum
             bal_trans[val.category] = val.amount - sum
         print(trans_dict)
+        
+        #Context we are passing to webpage
         context = {
             'user': logged_user,
             'user_goals': user_goal,
+            'time_remaining': time_remaining,
             'goal_trans': trans_dict,
             'goal_bal': bal_trans,
             # 'trans': user_goal.transactions.all()
@@ -139,17 +151,17 @@ def add_start_date(request):
     print('Here is the first selected date:')
     print(selected_date)
     
-    selected_date = datetime.strptime(selected_date, '%Y-%m-%d')
+    selected_date = datetime.datetime.strptime(selected_date, '%Y-%m-%d')
     print('Here is the modified selected date:')
     print(selected_date)
     
-    dateDifference = selected_date - datetime.now() 
+    dateDifference = selected_date - datetime.datetime.now() #Subtracts the current time from the selected date.
     dateDifference = dateDifference.total_seconds()
     dateDifference = int(dateDifference)
     print(dateDifference)
-    if(dateDifference <= 0):
+    if(dateDifference <= -86400): #86400 is the amount of seconds in a day. So, this checks to see if the date was within 24 hours of "now".
         print("Invalid: Date is in the past")
-    elif(dateDifference >= 0):
+    elif(dateDifference >= -86400):
         print("Date is valid.")
         user.plan_start_date = request.POST['selected_date']
         user.save()
